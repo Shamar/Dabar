@@ -2,5 +2,53 @@
 bin
 obj
 
-# mstest test results
-TestResults
+#OS junk files
+Thumbs.db
+*.DS_Store
+
+#Visual Studio files
+*.obj
+*.exe
+*.pdb
+*.user
+*.userprefs
+*.pidb
+*.gpState
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+*_bkp
+ipch/
+obj/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+
+#Tooling
+_ReSharper*/
+[Tt]est[Rr]esult*
+[Tt]est-[Rr]esult*
+*.VisualState.xml
+
+#Project files
+[Bb]uild/
+
+#Subversion files
+.svn
+
+Documentation/Epic.API.shfbproj_*
+
