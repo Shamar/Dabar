@@ -32,10 +32,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="Dabar.Contracts\Dabar.Contracts.csproj">
+      <Project>{9AAAB465-5F6B-43A8-AA9F-3306E969F74E}</Project>
+      <Name>Dabar.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
