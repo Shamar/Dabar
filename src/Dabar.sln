@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compiler", "Compiler", "{30D4CF20-0B9F-474B-B45E-436DF716083D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dabar", "Dabar\Dabar.csproj", "{2E7FB3F4-7079-44E8-8574-49909E035752}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{E4C0BE02-292B-4E62-A0A4-1FBF1D021FB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E7FB3F4-7079-44E8-8574-49909E035752}.Debug|x86.ActiveCfg = Debug|x86
+		{2E7FB3F4-7079-44E8-8574-49909E035752}.Debug|x86.Build.0 = Debug|x86
+		{2E7FB3F4-7079-44E8-8574-49909E035752}.Release|x86.ActiveCfg = Release|x86
+		{2E7FB3F4-7079-44E8-8574-49909E035752}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2E7FB3F4-7079-44E8-8574-49909E035752} = {30D4CF20-0B9F-474B-B45E-436DF716083D}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Dabar\Dabar.csproj
+		Policies = $0
+		$0.StandardHeader = $1
+		$1.Text = @ \n ${FileName}\n \n Author:\n      ${AuthorName} <${AuthorEmail}>\n\n Copyright (c) ${Year} ${CopyrightHolder}\n\n This program is free software: you can redistribute it and/or modify\n it under the terms of the GNU Affero General Public License as published by\n the Free Software Foundation, either version 3 of the License, or\n (at your option) any later version.\n\n This program is distributed in the hope that it will be useful,\n but WITHOUT ANY WARRANTY; without even the implied warranty of\n MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n GNU Affero General Public License for more details.\n\n You should have received a copy of the GNU Affero General Public License\n along with this program.  If not, see <http://www.gnu.org/licenses/>.
+		$1.IncludeInNewFiles = True
+		$0.TextStylePolicy = $2
+		$2.inheritsSet = VisualStudio
+		$2.inheritsScope = text/plain
+		$2.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $3
+		$3.IndentSwitchBody = True
+		$3.AnonymousMethodBraceStyle = NextLine
+		$3.PropertyBraceStyle = NextLine
+		$3.PropertyGetBraceStyle = NextLine
+		$3.PropertySetBraceStyle = NextLine
+		$3.EventBraceStyle = NextLine
+		$3.EventAddBraceStyle = NextLine
+		$3.EventRemoveBraceStyle = NextLine
+		$3.StatementBraceStyle = NextLine
+		$3.ArrayInitializerBraceStyle = NextLine
+		$3.BeforeMethodDeclarationParentheses = False
+		$3.BeforeMethodCallParentheses = False
+		$3.BeforeConstructorDeclarationParentheses = False
+		$3.BeforeDelegateDeclarationParentheses = False
+		$3.NewParentheses = False
+		$3.inheritsSet = Mono
+		$3.inheritsScope = text/x-csharp
+		$3.scope = text/x-csharp
+		$0.TextStylePolicy = $4
+		$4.FileWidth = 120
+		$4.inheritsSet = VisualStudio
+		$4.inheritsScope = text/plain
+		$4.scope = text/plain
+		outputpath = ..\build\bin
+	EndGlobalSection
+EndGlobal
