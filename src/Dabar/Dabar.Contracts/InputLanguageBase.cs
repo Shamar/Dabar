@@ -23,16 +23,21 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Xsl;
 using System.Xml.Resolvers;
+using System.Collections.Generic;
+using System.Xml.XPath;
+using System.Linq;
 
 namespace Dabar.Contracts
 {
     public abstract class InputLanguageBase : IDisposable
     {
         private readonly XmlSchema _schema;
-        private readonly XslCompiledTransform _xslt;
-        private readonly XsltArgumentList _xslArg;
-        protected InputLanguageBase()
+        private readonly InputCodeValidatorBase[] _validators;
+
+        protected InputLanguageBase(InputCodeValidatorBase[] validators)
         {
+            if(null == validators || validators.Length == 0 || validators.Any(v => null == v))
+                throw new ArgumentNullException("validators");
             var assembly = this.GetType().Assembly;
             var namespaceName = this.GetType().Namespace;
             var languageName = this.GetType().Name;
@@ -41,64 +46,61 @@ namespace Dabar.Contracts
             {
                 _schema = XmlSchema.Read(
                     reader, 
-                    new ValidationEventHandler(languageValidationEventHandler));
+                    new ValidationEventHandler(languageValidationCallBack));
             }
-            _xslt = new XslCompiledTransform();
-
-            var resolver = new XmlPreloadedResolver();
-
-            string mainXSLT = null;
-            string[] resourceNames = this.GetType().Assembly.GetManifestResourceNames();
-            foreach(string resourceName in resourceNames)
-            {
-                if(resourceName.EndsWith(".xslt") && resourceName.Contains(languageName))
-                {
-                    string templateName = resourceName.Substring(resourceName.LastIndexOf(languageName) + languageName.Length);
-                    if(templateName == ".xslt")
-                    {
-                        mainXSLT = resourceName;
-                    }
-                    else
-                    {
-                        using (var stream = assembly.GetManifestResourceStream(namespaceName + "." + languageName + ".Language.xsd"))
-                        {
-                            resolver.Add(resolver.ResolveUri(null, templateName), stream);
-                        }
-                    }
-                }
-            }
-            using (var stream = assembly.GetManifestResourceStream(mainXSLT))
-            using (var reader = XmlReader.Create(stream))
-            {
-                _xslt.Load(reader, null, resolver);
-            }
+            _validators = validators;
         }
 
-        protected InputLanguageBase(XsltArgumentList xsltArgumentList)
-            : this()
-        {
-            if(null == xsltArgumentList)
-                throw new ArgumentNullException("xsltArgumentList");
-            _xslArg = xsltArgumentList;
-        }
-
-        private void languageValidationEventHandler(object sender, ValidationEventArgs e)
+        private void languageValidationCallBack(object sender, ValidationEventArgs e)
         {
             if (e.Severity == XmlSeverityType.Warning)
             {
                 string message = string.Format("The XSD validation of the language '{0}' produced a warning: {1}", this.GetType().Name, e.Message);
                 throw new InvalidOperationException(message);
-            }
-            else if (e.Severity == XmlSeverityType.Error)
+            } else if (e.Severity == XmlSeverityType.Error)
             {
                 string message = string.Format("The XSD validation of the language '{0}' produced a warning: {1}", this.GetType().Name, e.Message);
                 throw new InvalidOperationException(message);
             }
         }
 
-        public bool IsValid(string sourceFilePath)
+        private void sourceValidationCallBack(string sourceFilePath, List<CompilationMessage> resultingMessages, object sender, ValidationEventArgs e)
         {
-            return false;
+            if (e.Severity == XmlSeverityType.Warning)
+            {
+                resultingMessages.Add(new Warning(sourceFilePath, "unknown", e.Message));
+            } 
+            else if (e.Severity == XmlSeverityType.Error)
+            {
+                resultingMessages.Add(new Error(sourceFilePath, "unknown", e.Message));
+            }
+        }
+
+        public bool IsValid(string sourceFilePath, out IEnumerable<CompilationMessage> messages)
+        {
+            List<CompilationMessage> resultingMessages = new List<CompilationMessage>();
+
+            XmlSchemaSet sc = new XmlSchemaSet();
+            
+            // Add the schema to the collection.
+            sc.Add(_schema);
+            
+            // Set the validation settings.
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.ValidationType = ValidationType.Schema;
+            settings.Schemas = sc;
+            settings.ValidationEventHandler += new ValidationEventHandler((s, e) => sourceValidationCallBack(sourceFilePath, resultingMessages, s, e));
+            XmlReader reader = XmlReader.Create(sourceFilePath, settings);
+            XPathDocument document = new XPathDocument(reader);
+            if (resultingMessages.TrueForAll(m => !(m is Error)))
+            {
+                for (int i = 0; i < _validators.Length; ++i)
+                {
+                    resultingMessages.AddRange(_validators [i].Validate(document));
+                }
+            }
+            messages = resultingMessages.ToArray();
+            return resultingMessages.TrueForAll(m => !(m is Error));
         }
 
         #region IDisposable implementation

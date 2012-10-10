@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<FileSystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.tesio.it/Dabar/FileSystem" xmlns:tns="http://www.tesio.it/Dabar/FileSystem" xsi:schemaLocation="http://www.tesio.it/Dabar/FileSystem ../../src/Dabar/Dabar.Contracts/FileSystem.xsd">
+  <file name="test">
+    <content></content>
+  </file>
+<directory name="test2"><directory name="test2"/></directory>
+</FileSystem>

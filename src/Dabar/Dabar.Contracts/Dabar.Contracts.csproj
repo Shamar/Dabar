@@ -36,6 +36,16 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="InputLanguageBase.cs" />
+    <Compile Include="InputCodeValidatorBase.cs" />
+    <Compile Include="Error.cs" />
+    <Compile Include="Warning.cs" />
+    <Compile Include="CompilationMessage.cs" />
+    <Compile Include="XSLTValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <EmbeddedResource Include="FileSystem.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

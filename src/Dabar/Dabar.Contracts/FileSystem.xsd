@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.tesio.it/Dabar/FileSystem" targetNamespace="http://www.tesio.it/Dabar/FileSystem" elementFormDefault="qualified">
+  <xs:element name="FileSystem">
+    <xs:annotation>
+      <xs:documentation>
+      Description of a filesystem to build.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded" minOccurs="1">
+        <xs:element name="file" type="tns:FileType" minOccurs="0"/>
+        <xs:element name="directory" type="tns:DirectoryType" minOccurs="0">
+          <xs:unique name="dNames">
+            <xs:selector xpath="*"/>
+            <xs:field xpath="@name"/>
+          </xs:unique>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:unique name="fsNames">
+      <xs:selector xpath="*"/>
+      <xs:field xpath="@name"/>
+    </xs:unique>
+  </xs:element>
+  <xs:complexType name="DirectoryType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="file" type="tns:FileType" minOccurs="0"/>
+      <xs:element name="directory" type="tns:DirectoryType" minOccurs="0">
+        <xs:unique name="dtNames">
+          <xs:selector xpath="*"/>
+          <xs:field xpath="@name"/>
+        </xs:unique>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="name" type="tns:DirName" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="FileType">
+    <xs:sequence>
+      <xs:element name="content" type="xs:string" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="tns:FileName" use="required"/>
+  </xs:complexType>
+  <xs:simpleType name="DirName">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(.?[a-zA-Z0-9]+)"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FileName">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(.?[a-zA-Z0-9]+(.[a-zA-Z0-9]+)+)"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
