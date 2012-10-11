@@ -26,6 +26,8 @@ using System.Xml.Resolvers;
 using System.Collections.Generic;
 using System.Xml.XPath;
 using System.Linq;
+using System.Text;
+using System.IO;
 
 namespace Dabar.Contracts
 {
@@ -34,7 +36,9 @@ namespace Dabar.Contracts
         private readonly XmlSchema _schema;
         private readonly InputCodeValidatorBase[] _validators;
 
-        protected InputLanguageBase(InputCodeValidatorBase[] validators)
+        private string _schemaString;
+
+        protected InputLanguageBase(params InputCodeValidatorBase[] validators)
         {
             if(null == validators || validators.Length == 0 || validators.Any(v => null == v))
                 throw new ArgumentNullException("validators");
@@ -49,6 +53,31 @@ namespace Dabar.Contracts
                     new ValidationEventHandler(languageValidationCallBack));
             }
             _validators = validators;
+        }
+
+        public string Name
+        {
+            get
+            {
+                return this.GetType().Name;
+            }
+        }
+
+        public string Schema
+        {
+            get
+            {
+                if(null == _schemaString)
+                {
+                    StringBuilder sBuilder = new StringBuilder();
+                    using(StringWriter sWriter = new StringWriter(sBuilder))
+                    {
+                        _schema.Write(sWriter);
+                    }
+                    _schemaString = sBuilder.ToString();
+                }
+                return _schemaString; 
+            }
         }
 
         private void languageValidationCallBack(object sender, ValidationEventArgs e)

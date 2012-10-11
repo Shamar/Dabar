@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dabar.Contracts", "Dabar\Da
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{E4C0BE02-292B-4E62-A0A4-1FBF1D021FB8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Languages", "Languages", "{C0B90210-1C93-4B83-B046-2ECBDEBC8DFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dabar.Language", "Dabar.Language\Dabar.Language.csproj", "{C92E3FF1-6BDF-4CC0-969E-9BB269908764}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -23,10 +27,15 @@ Global
 		{9AAAB465-5F6B-43A8-AA9F-3306E969F74E}.Debug|x86.Build.0 = Debug|Any CPU
 		{9AAAB465-5F6B-43A8-AA9F-3306E969F74E}.Release|x86.ActiveCfg = Release|Any CPU
 		{9AAAB465-5F6B-43A8-AA9F-3306E969F74E}.Release|x86.Build.0 = Release|Any CPU
+		{C92E3FF1-6BDF-4CC0-969E-9BB269908764}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C92E3FF1-6BDF-4CC0-969E-9BB269908764}.Debug|x86.Build.0 = Debug|Any CPU
+		{C92E3FF1-6BDF-4CC0-969E-9BB269908764}.Release|x86.ActiveCfg = Release|Any CPU
+		{C92E3FF1-6BDF-4CC0-969E-9BB269908764}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2E7FB3F4-7079-44E8-8574-49909E035752} = {30D4CF20-0B9F-474B-B45E-436DF716083D}
 		{9AAAB465-5F6B-43A8-AA9F-3306E969F74E} = {30D4CF20-0B9F-474B-B45E-436DF716083D}
+		{C92E3FF1-6BDF-4CC0-969E-9BB269908764} = {C0B90210-1C93-4B83-B046-2ECBDEBC8DFF}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Dabar\Dabar.csproj
