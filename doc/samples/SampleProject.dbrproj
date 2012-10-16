@@ -3,5 +3,5 @@
   <documentation>Markdown documentation.</documentation>
   <definition name="Product"/>
   <namespace name="Specifications"/>
-  <versionFile>File.version</versionFile>
+  <versionFile>../File.version</versionFile>
 </module>

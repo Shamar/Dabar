@@ -78,7 +78,7 @@
   </xs:complexType>
   <xs:simpleType name="FilePath">
     <xs:restriction base="xs:string">
-      <xs:pattern value="((../)*([./]?[a-zA-Z0-1]+)+(.[a-zA-Z0-1]+)?)"/>
+      <xs:pattern value="((\.\./)*\.?[a-zA-Z0-1][a-zA-Z0-1/_]+(.[a-zA-Z0-1]+)?)"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
