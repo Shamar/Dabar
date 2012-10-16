@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<module name="Sample.Project" snk="test.snk" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://dabar.tesio.it/" xmlns:dbr="http://dabar.tesio.it/" xsi:schemaLocation="http://dabar.tesio.it/ D:/Dabar/src/Dabar.Language/Dabar.xsd">
+  <documentation>Markdown documentation.</documentation>
+  <definition name="Product"/>
+  <namespace name="Specifications"/>
+  <versionFile>File.version</versionFile>
+</module>
